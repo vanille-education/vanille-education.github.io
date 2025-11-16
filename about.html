@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About – Vanille Education</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanille Education - About</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      font-family: 'Segoe UI', sans-serif;
+      color: #d9f0e1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .about-hero {
+      text-align: center;
+      padding: 3rem 1rem 1rem 1rem;
+    }
+
+    .about-hero h1 {
+      color: #00ffa0;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-hero p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .about-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #121212;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,180,0.1);
+      text-align: center;
+    }
+
+    .about-container p {
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .about-hero h1 {
+        font-size: 1.6rem;
+      }
+      .about-container {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <nav class="navbar">
-    <div class="logo">Vanille Education</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a class="active" href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+  <div class="about-hero">
+    <h1>About Vanille Education</h1>
+    <p>Vanille Education is dedicated to sharing free online courses and certifications across multiple industries. Our mission is to make professional learning accessible for everyone, anytime, anywhere.</p>
+  </div>
 
-<main class="page-content">
-
-  <h1>About Vanille Education</h1>
-
-  <p>
-    <strong>Vanille Education</strong> is an independent, open-access platform designed
-    to collect, organize, and showcase the best <strong>free online courses and certifications</strong>
-    available worldwide.  
-  </p>
-
-  <p>
-    The project was created by <strong>Vanille</strong>, combining technology, community,  
-    and accessible learning into a single hub. The goal is simple:  
-    <em>to make high-quality education reachable for everyone, without barriers.</em>
-  </p>
-
-  <h2>Our Mission</h2>
-  <ul>
-    <li>Provide curated lists of free courses from trusted providers.</li>
-    <li>Promote accessible, self-paced learning.</li>
-    <li>Help students, professionals, and creators develop real skills for real careers.</li>
-  </ul>
-
-  <h2>Why This Project Exists</h2>
-  <p>
-    Many platforms hide free certifications, make them hard to find, or bombard
-    you with ads. Vanille Education solves that with a clean, simple,  
-    and transparent directory that stays updated and community-driven.
-  </p>
-
-  <p>
-    Whether you're improving your CV, learning tech, or exploring new fields,  
-    Vanille Education is built to support your journey.
-  </p>
-
-</main>
-
-<footer>
-  <p>© 2025 Vanille Education. All rights reserved.</p>
-</footer>
+  <div class="about-container">
+    <p>We carefully curate free resources from trusted providers, including cloud platforms, programming schools, AI courses, and more.</p>
+    <p>Follow us or contact us for updates and new content:</p>
+    <p>✉️ Email: vanillespectre@proton.me</p>
+    <p>📸 Instagram: @vanille.vault</p>
+  </div>
 
 </body>
 </html>
