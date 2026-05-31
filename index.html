@@ -1,593 +1,626 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VanilleVault // Recursos Filtrados</title>
+  <meta name="description" content="Certificaciones y recursos técnicos gratuitos. Filtrados por NVLL. Sin humo." />
+  <link rel="icon" type="image/png" href="vanille-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
 
-<title>Becas Vanille — Certificaciones Gratuitas y Cursos Free</title>
-<meta name="description" content="Accede a certificaciones, cursos y rutas formativas gratuitas seleccionadas por el sistema Vanille.">
-<link rel="icon" type="image/png" href="/assets/vanille-icon.png">
+  <style>
+    :root {
+      --cyan: #00e5c8;
+      --cyan-dim: rgba(0,229,200,0.12);
+      --cyan-border: rgba(0,229,200,0.2);
+      --bg: #080808;
+      --bg2: #0d0d0d;
+      --text: #c8c8c8;
+      --text-dim: #555;
+      --grid: rgba(0,229,200,0.04);
+    }
 
-<meta property="og:title" content="Becas Vanille — Certificaciones y Cursos Free">
-<meta property="og:description" content="Formación gratuita filtrada por el ecosistema Vanille.">
-<meta property="og:image" content="/assets/vanille-banner.webp">
-<meta property="og:type" content="website">
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-<style>
-:root {
-  --v-primary: #36ffb5;
-  --v-primary-dark: #1b1b1b;
-  --v-bg: #0d0d0d;
-  --v-text: #d7d7d7;
-  --v-card-bg: rgba(255,255,255,0.05);
-  --v-card-border: rgba(54,255,181,0.15);
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-  font-family: "JetBrains Mono", monospace;
-}
+    /* SCANLINES */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 100;
+    }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+    /* GRID BG */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-body {
-  background: var(--v-bg);
-  color: var(--v-text);
-}
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cyan-border);
+      padding: 0 2rem;
+    }
 
-/* NAV */
-nav {
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(54,255,181,0.2);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 52px;
+    }
 
-.nav-content {
-  max-width: 1200px;
-  margin: auto;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .nav-logo {
+      color: var(--cyan);
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
 
-.logo a {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  color: var(--v-primary);
-  font-weight: 700;
-  text-decoration: none;
-}
+    .nav-logo span {
+      color: var(--text-dim);
+      font-size: 12px;
+    }
 
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 1.5rem;
-}
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
 
-.nav-links a {
-  color: var(--v-text);
-  text-decoration: none;
-  transition: .2s;
-}
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1px;
+      transition: color .2s;
+    }
 
-.nav-links a:hover {
-  color: var(--v-primary);
-}
+    .nav-links a:hover { color: var(--cyan); }
 
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 4rem 1rem 3rem;
-}
+    /* MAIN */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
 
-.hero h1 {
-  font-size: 2.7rem;
-  color: var(--v-primary);
-  margin-bottom: 1rem;
-  text-shadow: 0 0 12px rgba(54,255,181,0.4);
-}
+    /* HERO */
+    .hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid #111;
+      margin-bottom: 3rem;
+    }
 
-.hero p {
-  font-size: 1.2rem;
-  color: #bbbbbb;
-}
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
 
-/* CARDS */
-.categories {
-  display: grid;
-  gap: 3rem;
-  padding: 0 1rem 3rem;
-  max-width: 1200px;
-  margin: auto;
-}
+    .hero h1 {
+      font-family: 'VT323', monospace;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--cyan);
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(0,229,200,0.3);
+      margin-bottom: 1rem;
+    }
 
-.certifications {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
+    .hero p {
+      color: var(--text-dim);
+      font-size: 13px;
+      max-width: 560px;
+      line-height: 1.8;
+    }
 
-.certification-card {
-  background: var(--v-card-bg);
-  padding: 1.8rem;
-  border-radius: 12px;
-  border: 1px solid var(--v-card-border);
-  text-decoration: none;
-  color: var(--v-text);
-  transition: .25s;
-  backdrop-filter: blur(5px);
-}
+    .hero p strong {
+      color: var(--text);
+    }
 
-.certification-card:hover {
-  border-color: var(--v-primary);
-  transform: translateY(-4px);
-  box-shadow: 0 0 14px rgba(54,255,181,0.2);
-}
+    /* TERMINAL BLOCK */
+    .terminal {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 13px;
+      max-width: 500px;
+    }
 
-.certification-card h3 {
-  color: var(--v-primary);
-  margin-bottom: .5rem;
-}
+    .terminal .prompt { color: var(--cyan); }
+    .terminal .cmd { color: #aaa; }
+    .terminal .out { color: var(--text-dim); margin-top: .3rem; }
+    .terminal .out span { color: var(--cyan); }
 
-/* FOOTER */
-footer {
-  background: #000;
-  border-top: 1px solid rgba(54,255,181,0.25);
-  padding: 2rem 1rem;
-  margin-top: 4rem;
-}
+    /* FILTER TABS */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 2.5rem;
+    }
 
-.footer-bottom {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: .9rem;
-  color: #777;
-}
-</style>
+    .filter-btn {
+      background: transparent;
+      border: 1px solid #1e1e1e;
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      padding: .4rem 1rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
 
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: var(--cyan-dim);
+    }
+
+    /* SECTION */
+    .category-section {
+      margin-bottom: 3rem;
+    }
+
+    .category-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid #111;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+
+    .category-title::before {
+      content: '//';
+      color: var(--cyan);
+    }
+
+    /* CARDS GRID */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1px;
+      background: #111;
+      border: 1px solid #111;
+    }
+
+    .card {
+      background: var(--bg2);
+      padding: 1.4rem;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--cyan);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .card:hover {
+      background: #0f0f0f;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-provider {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--cyan);
+      margin-bottom: .5rem;
+    }
+
+    .card h3 {
+      font-size: 13px;
+      color: #fff;
+      margin-bottom: .5rem;
+      line-height: 1.4;
+    }
+
+    .card-tech {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: .8rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: .8rem;
+      padding-top: .6rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border: 1px solid #1e1e1e;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .status-ok { color: var(--cyan); font-size: 10px; letter-spacing: 1px; }
+    .status-warn { color: #f0a500; font-size: 10px; letter-spacing: 1px; }
+
+    .card-arrow {
+      color: var(--text-dim);
+      font-size: 16px;
+      transition: color .2s, transform .2s;
+    }
+
+    .card:hover .card-arrow {
+      color: var(--cyan);
+      transform: translateX(3px);
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid #111;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    /* HIDDEN */
+    .hidden { display: none !important; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.5rem; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-content">
-    <div class="logo">
-      <a href="/">
-        <img src="/assets/vanille-icon.png" width="32">
-        <span>Becas Vanille</span>
-      </a>
-    </div>
-
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">VANILLEVAULT <span>// RECURSOS</span></a>
     <ul class="nav-links">
-      <li><a href="/about.html">Sobre</a></li>
-      <li><a href="/contact.html">Contacto</a></li>
+      <li><a href="about.html">SOBRE</a></li>
+      <li><a href="https://nodespectre.qzz.io" target="_blank">NODESPECTRE</a></li>
+      <li><a href="https://vanillevault.github.io" target="_blank">GITHUB</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
 
-<div class="hero">
-  <h1>Becas Vanille: Formación gratuita real</h1>
-  <p>Certificaciones, cursos y rutas oficiales — filtradas por el ecosistema Vanille, sin humo.</p>
-</div>
+  <div class="hero">
+    <div class="hero-label">// PROYECTO DE RECURSOS TÉCNICOS</div>
+    <h1>VANILLE<br>VAULT</h1>
+    <p>
+      Certificaciones y cursos gratuitos filtrados por <strong>NVLL</strong>.<br>
+      Sin humo. Sin listas infladas. Solo lo que funciona.
+    </p>
 
-<section class="categories">
-
-  <div class="category">
-    <h2 style="color: var(--v-primary); margin-bottom: 1rem;">General</h2>
-
-    <div class="certifications">
- <script type="module">const e=document.querySelector(".menu-toggle"),t=document.querySelector(".nav-links");e?.addEventListener("click",()=>{t?.classList.toggle("active"),e?.classList.toggle("active")});</script>
-<main>
-
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Free Certifications","description":"Find and compare free professional certifications across various industries","url":"https://free-certifications.com/"}</script>
-
-  <div class="hero" data-astro-cid-j7pv25f6>
-    <h1 data-astro-cid-j7pv25f6>Free Online Courses With Free Certificates</h1>
-    <p data-astro-cid-j7pv25f6>Discover curated lists of <strong data-astro-cid-j7pv25f6>free online certificate programs</strong> across various industries</p>
-  <section class="categories" data-astro-cid-j7pv25f6>
-    <div class="category" data-astro-cid-j7pv25f6>
-        <h2 data-astro-cid-j7pv25f6>General</h2>
-        <div class="certifications" data-astro-cid-j7pv25f6>
-          <a href="https://about.gitlab.com/learn/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free Certifications paths and badges</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Gitlab</p>
-              <p data-astro-cid-j7pv25f6>Technology: Gitlab Certification</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a  href="https://www.freecodecamp.org/learn/machine-learning-with-python/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free lesson and certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: freeCodeCamp</p>
-              <p data-astro-cid-j7pv25f6>Technology: Machine Learning with Python</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.freecodecamp.org/learn/data-visualization/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free lesson and certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: freeCodeCamp</p>
-              <p data-astro-cid-j7pv25f6>Technology: Data Visualization</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.databricks.com/resources/learn/training/generative-ai-fundamentals" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Generative AI Fundamentals</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Databricks</p>
-              <p data-astro-cid-j7pv25f6>Technology: AI Fundamentals</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://education.oracle.com/oracle-cloud-infrastructure-2023-foundations-associate/pexam_1Z0-1085-23" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Oracle Cloud Infrastructure 2023 Foundations Associate</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Oracle</p>
-              <p data-astro-cid-j7pv25f6>Technology: OCI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://education.oracle.com/oracle-cloud-data-management-2023-foundations-associate/pexam_1Z0-1105-23" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Oracle Cloud Data Management 2023 Foundations Associate</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Oracle</p>
-              <p data-astro-cid-j7pv25f6>Technology: OCI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.pluralsight.com/partners/microsoft/azure" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free subscription at Pluralsight for Microsoft Azure courses</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Pluralsight</p>
-              <p data-astro-cid-j7pv25f6>Technology: Azure</p>
-              <p data-astro-cid-j7pv25f6>Expiration: 01-Jan-2025</p>
-            </a><a href="https://aviatrix.teachable.com" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Aviatrix, Free ACE - Multicloud Networking associate Course &amp; Certificate code ACEMULTICLOUD</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Aviatrix</p>
-              <p data-astro-cid-j7pv25f6>Technology: Cloud Networking</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Limited Time</p>
-            </a><a href="https://docs.microsoft.com/en-us/learn/challenges?id=b1ac64ec-f0d3-45fa-beee-f230f9a75e81" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Learn how to design, build, test, and maintain cloud applications and services on Microsoft Azure.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Build: Azure Developer Challenge</p>
-              <p data-astro-cid-j7pv25f6>Technology: Microsoft</p>
-              <p data-astro-cid-j7pv25f6>Expiration: 21-Jun-2022</p>
-            </a><a href="https://jumpcloud.com/university/certifications/core" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free JumpCloud Core Certification (worth $150).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: JumpCloud</p>
-              <p data-astro-cid-j7pv25f6>Technology: JumpCloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Limited Time</p>
-            </a><a href="https://go.qwiklabs.com/qwiklabs-free" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Extra 30 days for Google Cloud labs on Qwiklabs.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: QwikLabs</p>
-              <p data-astro-cid-j7pv25f6>Technology: Google Cloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://testautomationu.applitools.com/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free certification courses by the Test Automation University.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Test Automation University</p>
-              <p data-astro-cid-j7pv25f6>Technology: Automated Testing</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://learningportal.juniper.net/juniper/user_activity_info.aspx?id=11478" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Courses and certifications for free by Juniper Networks (instead of 150 euros).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Juniper Networks</p>
-              <p data-astro-cid-j7pv25f6>Technology: Security</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://go.qwiklabs.com/googlecloudsolutions" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Claim 30 days of free Qwiklabs and access to the featured labs.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Qwiklabs</p>
-              <p data-astro-cid-j7pv25f6>Technology: Google Cloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://ilearningx.huawei.com/portal/courses" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free courses &amp; exams from Huawei Academy for the HCIA, HCIP, and HCIE certifications.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Huawei Academy</p>
-              <p data-astro-cid-j7pv25f6>Technology: Huawei Networking</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://e.huawei.com/en/talent/#/ict/partner-details?consultationId=545&consClassCode=AUTH&consTypeCode=consulationRZZX&urlForm=certifi" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free course &amp; certification (HCIA level, $200 value).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Huawei Academ</p>
-              <p data-astro-cid-j7pv25f6>Technology: Huawei Networking</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.jetbrains.com/academy/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free courses by JetBrains Academy for learning Java, Kotlin &amp; Python.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: JetBrains</p>
-              <p data-astro-cid-j7pv25f6>Technology: Programming</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.elastic.co/training/free" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free access to 11 Elastic Stack courses ($200 value each).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Elastic</p>
-              <p data-astro-cid-j7pv25f6>Technology: Cloud Monitoring</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://blog.udacity.com/2020/03/one-month-free-on-nanodegrees.html" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>One free month of access to nanodegree programs by Udacity ($400 value). Credit card / PayPal required. Don’t forget to cancel in time.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Udacity</p>
-              <p data-astro-cid-j7pv25f6>Technology: Diverse</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.coursera.org/specializations/alibabacloud" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Architecting on Alibaba Cloud Specialization at Coursera.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Coursera</p>
-              <p data-astro-cid-j7pv25f6>Technology: Alibaba Cloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://training.linuxfoundation.org/resources/?_sft_content_type=free-course" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>The Linux Foundation offers 23 free courses with finalizing exams &amp; confirmations.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: The Linux Foundation</p>
-              <p data-astro-cid-j7pv25f6>Technology: DevOps</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://standard.cbu.cloudbees.com/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free training through CloudBees University (Jenkins, DevOps).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: CloudBees University</p>
-              <p data-astro-cid-j7pv25f6>Technology: DevOps</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.sumologic.com/learn/certifications/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>6 free training courses and certifications by Sumo Logic.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Sumo Logic</p>
-              <p data-astro-cid-j7pv25f6>Technology: Data Analytics</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.freecodecamp.org/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>6 Free Code Camp learning courses &amp; certifications, incl. RWD, JavaScript, APIs, React…</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Freecodecamp</p>
-              <p data-astro-cid-j7pv25f6>Technology: Web Development</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.udemy.com/courses/free/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>~670 free courses at Udemy, incl. certificates.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Udemy</p>
-              <p data-astro-cid-j7pv25f6>Technology: Diverse</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://exams.cpanel.net/catalog/info/id:228,cat:38" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free cPanel Professional Certification (CPP) awarded simply by successfully completing the full series of video lessons. There is no final certification exam required for the CPP status.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Cpanel University</p>
-              <p data-astro-cid-j7pv25f6>Technology: cPanel</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://university.plesk.com/catalog/info/id:343" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free Plesk Obsidian Professional Certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Plesk University</p>
-              <p data-astro-cid-j7pv25f6>Technology: Plesk</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://university.plesk.com/catalog/info/id:369" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free SolusIO Professional Certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Plesk University</p>
-              <p data-astro-cid-j7pv25f6>Technology: SolusIO</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://analytics.google.com/analytics/academy/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Google Analytics Academy free courses with certificates</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Google Analytics Academy</p>
-              <p data-astro-cid-j7pv25f6>Technology: Analytics</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.silver-peak.com/support/training" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Silver Peak, offers Free Training &amp; Certification Exam for SD-WAN Professional</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Silver Peak</p>
-              <p data-astro-cid-j7pv25f6>Technology: SD-WAN</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://cognitiveclass.ai/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free AI courses with proof of completion and badge</h3>
-              <p data-astro-cid-j7pv25f6>Provider: IBM Cognitive Class</p>
-              <p data-astro-cid-j7pv25f6>Technology: Data Science, AI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.bitdegree.org/free-certifications-online" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Gain or improve digital skills on our eLearning platform</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Bitdegree</p>
-              <p data-astro-cid-j7pv25f6>Technology: IT sector</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://info.lakesidesoftware.com/acton/fs/blocks/showLandingPage/a/31052/p/p-0081/t/page/fm/0" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free SysTrack certification and badge upon completion of self-paced courses through their online learning platform. They offer three courses: SysTrack Technician, SysTrack Engineer, and SysTrack Dashboard Designer.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Lakeside Software</p>
-              <p data-astro-cid-j7pv25f6>Technology: SysTrack</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.eggplantsoftware.com/training-and-certifications" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free Eggplant courses and certifications.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Eggplant</p>
-              <p data-astro-cid-j7pv25f6>Technology: Eggplant</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://aws.amazon.com/training/restart/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free full-time AWS training with certification and launch a career in cloud computing with AWS re/Start for unemployed and underemployed individuals.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: AWS</p>
-              <p data-astro-cid-j7pv25f6>Technology: AWS</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://explore.skillbuilder.aws/learn/course/11458/aws-cloud-quest-cloud-practitioner" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>AWS Cloud Quest: Cloud Practitioner</h3>
-              <p data-astro-cid-j7pv25f6>Provider: AWS</p>
-              <p data-astro-cid-j7pv25f6>Technology: AWS</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://explore.skillbuilder.aws/learn/public/learning_plan/view/1044/solutions-architect-knowledge-badge-readiness-path" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>AWS Solutions Architect - Knowledge Badge Readiness Path</h3>
-              <p data-astro-cid-j7pv25f6>Provider: AWS</p>
-              <p data-astro-cid-j7pv25f6>Technology: AWS</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://academy.postman.com/path/postman-api-fund
-              <h3 data-astro-cid-j7pv25f6>Free Certifications paths and badges</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Gitlab</p>
-              <p data-astro-cid-j7pv25f6>Technology: Gitlab Certification</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.freecodecamp.org/learn/machine-learning-with-python/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free lesson and certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: freeCodeCamp</p>
-              <p data-astro-cid-j7pv25f6>Technology: Machine Learning with Python</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.freecodecamp.org/learn/data-visualization/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free lesson and certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: freeCodeCamp</p>
-              <p data-astro-cid-j7pv25f6>Technology: Data Visualization</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.databricks.com/resources/learn/training/generative-ai-fundamentals" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Generative AI Fundamentals</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Databricks</p>
-              <p data-astro-cid-j7pv25f6>Technology: AI Fundamentals</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://education.oracle.com/oracle-cloud-infrastructure-2023-foundations-associate/pexam_1Z0-1085-23" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Oracle Cloud Infrastructure 2023 Foundations Associate</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Oracle</p>
-              <p data-astro-cid-j7pv25f6>Technology: OCI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://education.oracle.com/oracle-cloud-data-management-2023-foundations-associate/pexam_1Z0-1105-23" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Oracle Cloud Data Management 2023 Foundations Associate</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Oracle</p>
-              <p data-astro-cid-j7pv25f6>Technology: OCI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.pluralsight.com/partners/microsoft/azure" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free subscription at Pluralsight for Microsoft Azure courses</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Pluralsight</p>
-              <p data-astro-cid-j7pv25f6>Technology: Azure</p>
-              <p data-astro-cid-j7pv25f6>Expiration: 01-Jan-2025</p>
-            </a><a href="https://aviatrix.teachable.com" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Aviatrix, Free ACE - Multicloud Networking associate Course &amp; Certificate code ACEMULTICLOUD</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Aviatrix</p>
-              <p data-astro-cid-j7pv25f6>Technology: Cloud Networking</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Limited Time</p>
-            </a><a href="https://docs.microsoft.com/en-us/learn/challenges?id=b1ac64ec-f0d3-45fa-beee-f230f9a75e81" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Learn how to design, build, test, and maintain cloud applications and services on Microsoft Azure.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Build: Azure Developer Challenge</p>
-              <p data-astro-cid-j7pv25f6>Technology: Microsoft</p>
-              <p data-astro-cid-j7pv25f6>Expiration: 21-Jun-2022</p>
-            </a><a href="https://jumpcloud.com/university/certifications/core" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free JumpCloud Core Certification (worth $150).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: JumpCloud</p>
-              <p data-astro-cid-j7pv25f6>Technology: JumpCloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Limited Time</p>
-            </a><a href="https://go.qwiklabs.com/qwiklabs-free" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Extra 30 days for Google Cloud labs on Qwiklabs.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: QwikLabs</p>
-              <p data-astro-cid-j7pv25f6>Technology: Google Cloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://testautomationu.applitools.com/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free certification courses by the Test Automation University.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Test Automation University</p>
-              <p data-astro-cid-j7pv25f6>Technology: Automated Testing</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://learningportal.juniper.net/juniper/user_activity_info.aspx?id=11478" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Courses and certifications for free by Juniper Networks (instead of 150 euros).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Juniper Networks</p>
-              <p data-astro-cid-j7pv25f6>Technology: Security</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://go.qwiklabs.com/googlecloudsolutions" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Claim 30 days of free Qwiklabs and access to the featured labs.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Qwiklabs</p>
-              <p data-astro-cid-j7pv25f6>Technology: Google Cloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://ilearningx.huawei.com/portal/courses" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free courses &amp; exams from Huawei Academy for the HCIA, HCIP, and HCIE certifications.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Huawei Academy</p>
-              <p data-astro-cid-j7pv25f6>Technology: Huawei Networking</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://e.huawei.com/en/talent/#/ict/partner-details?consultationId=545&consClassCode=AUTH&consTypeCode=consulationRZZX&urlForm=certifi" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free course &amp; certification (HCIA level, $200 value).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Huawei Academ</p>
-              <p data-astro-cid-j7pv25f6>Technology: Huawei Networking</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.jetbrains.com/academy/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free courses by JetBrains Academy for learning Java, Kotlin &amp; Python.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: JetBrains</p>
-              <p data-astro-cid-j7pv25f6>Technology: Programming</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.elastic.co/training/free" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free access to 11 Elastic Stack courses ($200 value each).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Elastic</p>
-              <p data-astro-cid-j7pv25f6>Technology: Cloud Monitoring</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://blog.udacity.com/2020/03/one-month-free-on-nanodegrees.html" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>One free month of access to nanodegree programs by Udacity ($400 value). Credit card / PayPal required. Don’t forget to cancel in time.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Udacity</p>
-              <p data-astro-cid-j7pv25f6>Technology: Diverse</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.coursera.org/specializations/alibabacloud" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Architecting on Alibaba Cloud Specialization at Coursera.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Coursera</p>
-              <p data-astro-cid-j7pv25f6>Technology: Alibaba Cloud</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://training.linuxfoundation.org/resources/?_sft_content_type=free-course" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>The Linux Foundation offers 23 free courses with finalizing exams &amp; confirmations.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: The Linux Foundation</p>
-              <p data-astro-cid-j7pv25f6>Technology: DevOps</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://standard.cbu.cloudbees.com/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free training through CloudBees University (Jenkins, DevOps).</h3>
-              <p data-astro-cid-j7pv25f6>Provider: CloudBees University</p>
-              <p data-astro-cid-j7pv25f6>Technology: DevOps</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.sumologic.com/learn/certifications/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>6 free training courses and certifications by Sumo Logic.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Sumo Logic</p>
-              <p data-astro-cid-j7pv25f6>Technology: Data Analytics</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.freecodecamp.org/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>6 Free Code Camp learning courses &amp; certifications, incl. RWD, JavaScript, APIs, React…</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Freecodecamp</p>
-              <p data-astro-cid-j7pv25f6>Technology: Web Development</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.udemy.com/courses/free/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>~670 free courses at Udemy, incl. certificates.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Udemy</p>
-              <p data-astro-cid-j7pv25f6>Technology: Diverse</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://exams.cpanel.net/catalog/info/id:228,cat:38" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free cPanel Professional Certification (CPP) awarded simply by successfully completing the full series of video lessons. There is no final certification exam required for the CPP status.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Cpanel University</p>
-              <p data-astro-cid-j7pv25f6>Technology: cPanel</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://university.plesk.com/catalog/info/id:343" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free Plesk Obsidian Professional Certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Plesk University</p>
-              <p data-astro-cid-j7pv25f6>Technology: Plesk</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://university.plesk.com/catalog/info/id:369" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free SolusIO Professional Certification</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Plesk University</p>
-              <p data-astro-cid-j7pv25f6>Technology: SolusIO</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://analytics.google.com/analytics/academy/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Google Analytics Academy free courses with certificates</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Google Analytics Academy</p>
-              <p data-astro-cid-j7pv25f6>Technology: Analytics</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.silver-peak.com/support/training" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Silver Peak, offers Free Training &amp; Certification Exam for SD-WAN Professional</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Silver Peak</p>
-              <p data-astro-cid-j7pv25f6>Technology: SD-WAN</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://cognitiveclass.ai/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free AI courses with proof of completion and badge</h3>
-              <p data-astro-cid-j7pv25f6>Provider: IBM Cognitive Class</p>
-              <p data-astro-cid-j7pv25f6>Technology: Data Science, AI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unlimited</p>
-            </a><a href="https://www.bitdegree.org/free-certifications-online" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Gain or improve digital skills on our eLearning platform</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Bitdegree</p>
-              <p data-astro-cid-j7pv25f6>Technology: IT sector</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://info.lakesidesoftware.com/acton/fs/blocks/showLandingPage/a/31052/p/p-0081/t/page/fm/0" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free SysTrack certification and badge upon completion of self-paced courses through their online learning platform. They offer three courses: SysTrack Technician, SysTrack Engineer, and SysTrack Dashboard Designer.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Lakeside Software</p>
-              <p data-astro-cid-j7pv25f6>Technology: SysTrack</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.eggplantsoftware.com/training-and-certifications" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free Eggplant courses and certifications.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Eggplant</p>
-              <p data-astro-cid-j7pv25f6>Technology: Eggplant</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://aws.amazon.com/training/restart/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free full-time AWS training with certification and launch a career in cloud computing with AWS re/Start for unemployed and underemployed individuals.</h3>
-              <p data-astro-cid-j7pv25f6>Provider: AWS</p>
-              <p data-astro-cid-j7pv25f6>Technology: AWS</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://explore.skillbuilder.aws/learn/course/11458/aws-cloud-quest-cloud-practitioner" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>AWS Cloud Quest: Cloud Practitioner</h3>
-              <p data-astro-cid-j7pv25f6>Provider: AWS</p>
-              <p data-astro-cid-j7pv25f6>Technology: AWS</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://explore.skillbuilder.aws/learn/public/learning_plan/view/1044/solutions-architect-knowledge-badge-readiness-path" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>AWS Solutions Architect - Knowledge Badge Readiness Path</h3>
-              <p data-astro-cid-j7pv25f6>Provider: AWS</p>
-              <p data-astro-cid-j7pv25f6>Technology: AWS</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://academy.postman.com/path/postman-api-fundamentals-student-expert" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Postman API Fundamentals Student Expert</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Postman</p>
-              <p data-astro-cid-j7pv25f6>Technology: API</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://www.coursera.org/specializations/deep-learning?ranMID=40328&ranEAID=bt30QTxEyjA&ranSiteID=bt30QTxEyjA-xNKOW7m9l8XUKUliBGG59Q&siteID=bt30QTxEyjA-xNKOW7m9l8XUKUliBGG59Q&utm_content=10&utm_medium=partners&utm_source=linkshare&utm_campaign=bt30QTxEyjA" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Deep Learning Specialization. Master Deep Learning, and Break into AI</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Deep Learning</p>
-              <p data-astro-cid-j7pv25f6>Technology: DeepLearning AI</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-            </a><a href="https://learning.kasten.io/" target="_blank" rel="nofollow" class="certification-card" data-astro-cid-j7pv25f6>
-              <h3 data-astro-cid-j7pv25f6>Free Kubernetes Training</h3>
-              <p data-astro-cid-j7pv25f6>Provider: Kasten.io by Veeam</p>
-              <p data-astro-cid-j7pv25f6>Technology: Kubernetes</p>
-              <p data-astro-cid-j7pv25f6>Expiration: Unknown</p>
-        </a>    
+    <div class="terminal">
+      <div><span class="prompt">nvll@vanillevault:~$</span> <span class="cmd">ls ./recursos --filter=free --sort=value</span></div>
+      <div class="out">→ <span>linux</span> // <span>cloud</span> // <span>devops</span> // <span>security</span> // <span>ai</span> // <span>dev</span></div>
+      <div class="out">→ certificaciones verificadas: <span>30+</span> // expiradas: eliminadas</div>
     </div>
   </div>
 
-</section>
-
-</main>
-<footer>
-  <div class="footer-bottom">
-    © 2025 Becas Vanille — Proyecto educativo abierto
+  <!-- FILTERS -->
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCards('all')">TODO</button>
+    <button class="filter-btn" onclick="filterCards('linux')">LINUX / DEVOPS</button>
+    <button class="filter-btn" onclick="filterCards('cloud')">CLOUD</button>
+    <button class="filter-btn" onclick="filterCards('security')">SECURITY</button>
+    <button class="filter-btn" onclick="filterCards('ai')">AI / DATA</button>
+    <button class="filter-btn" onclick="filterCards('dev')">DEV</button>
+    <button class="filter-btn" onclick="filterCards('general')">GENERAL</button>
   </div>
-</footer>
 
-</body>
-</html>
+  <!-- LINUX / DEVOPS -->
+  <div class="category-section" data-cat="linux">
+    <div class="category-title">LINUX // DEVOPS</div>
+    <div class="cards">
+
+      <a href="https://training.linuxfoundation.org/resources/?_sft_content_type=free-course" target="_blank" rel="nofollow" class="card" data-cat="linux">
+        <div class="card-provider">LINUX FOUNDATION</div>
+        <h3>23 cursos gratuitos con examen y certificado</h3>
+        <div class="card-tech">DevOps // Linux // Cloud</div>
+        <div class="card-footer">
+          <span class="tag">DEVOPS</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://standard.cbu.cloudbees.com/" target="_blank" rel="nofollow" class="card" data-cat="linux">
+        <div class="card-provider">CLOUDBEES UNIVERSITY</div>
+        <h3>Formación gratuita en Jenkins y DevOps</h3>
+        <div class="card-tech">Jenkins // CI/CD</div>
+        <div class="card-footer">
+          <span class="tag">DEVOPS</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://exams.cpanel.net/catalog/info/id:228,cat:38" target="_blank" rel="nofollow" class="card" data-cat="linux">
+        <div class="card-provider">CPANEL UNIVERSITY</div>
+        <h3>cPanel Professional Certification (CPP) gratuita</h3>
+        <div class="card-tech">cPanel // Server Admin</div>
+        <div class="card-footer">
+          <span class="tag">SYSADMIN</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://university.plesk.com/catalog/info/id:343" target="_blank" rel="nofollow" class="card" data-cat="linux">
+        <div class="card-provider">PLESK UNIVERSITY</div>
+        <h3>Plesk Obsidian Professional Certification</h3>
+        <div class="card-tech">Plesk // Hosting</div>
+        <div class="card-footer">
+          <span class="tag">SYSADMIN</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://learning.kasten.io/" target="_blank" rel="nofollow" class="card" data-cat="linux">
+        <div class="card-provider">KASTEN.IO BY VEEAM</div>
+        <h3>Free Kubernetes Training y certificación</h3>
+        <div class="card-tech">Kubernetes // K8s</div>
+        <div class="card-footer">
+          <span class="tag">DEVOPS</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://about.gitlab.com/learn/" target="_blank" rel="nofollow" class="card" data-cat="linux">
+        <div class="card-provider">GITLAB</div>
+        <h3>Rutas de certificación y badges gratuitos</h3>
+        <div class="card-tech">GitLab // CI/CD // DevOps</div>
+        <div class="card-footer">
+          <span class="tag">DEVOPS</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- CLOUD -->
+  <div class="category-section" data-cat="cloud">
+    <div class="category-title">CLOUD</div>
+    <div class="cards">
+
+      <a href="https://education.oracle.com/oracle-cloud-infrastructure-2023-foundations-associate/pexam_1Z0-1085-23" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">ORACLE</div>
+        <h3>OCI 2023 Foundations Associate</h3>
+        <div class="card-tech">Oracle Cloud Infrastructure</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://education.oracle.com/oracle-cloud-data-management-2023-foundations-associate/pexam_1Z0-1105-23" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">ORACLE</div>
+        <h3>OCI Data Management 2023 Foundations Associate</h3>
+        <div class="card-tech">Oracle Cloud // Data</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://aws.amazon.com/training/restart/" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">AWS</div>
+        <h3>AWS re/Start — formación completa con certificación</h3>
+        <div class="card-tech">AWS // Cloud Computing</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://explore.skillbuilder.aws/learn/course/11458/aws-cloud-quest-cloud-practitioner" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">AWS</div>
+        <h3>AWS Cloud Quest: Cloud Practitioner</h3>
+        <div class="card-tech">AWS // Gamified Learning</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://explore.skillbuilder.aws/learn/public/learning_plan/view/1044/solutions-architect-knowledge-badge-readiness-path" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">AWS</div>
+        <h3>Solutions Architect Knowledge Badge Path</h3>
+        <div class="card-tech">AWS // Architecture</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://ilearningx.huawei.com/portal/courses" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">HUAWEI ACADEMY</div>
+        <h3>Cursos y certificaciones HCIA / HCIP / HCIE gratuitos</h3>
+        <div class="card-tech">Huawei Networking // Cloud</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/specializations/alibabacloud" target="_blank" rel="nofollow" class="card" data-cat="cloud">
+        <div class="card-provider">COURSERA // ALIBABA</div>
+        <h3>Architecting on Alibaba Cloud Specialization</h3>
+        <div class="card-tech">Alibaba Cloud</div>
+        <div class="card-footer">
+          <span class="tag">CLOUD</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- SECURITY -->
+  <div class="category-section" data-cat="security">
+    <div class="category-title">SECURITY</div>
+    <div class="cards">
+
+      <a href="https://learningportal.juniper.net/juniper/user_activity_info.aspx?id=11478" target="_blank" rel="nofollow" class="card" data-cat="security">
+        <div class="card-provider">JUNIPER NETWORKS</div>
+        <h3>Cursos y certificaciones de seguridad gratuitos (valor €150)</h3>
+        <div class="card-tech">Network Security // Juniper</div>
+        <div class="card-footer">
+          <span class="tag">SECURITY</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://cognitiveclass.ai/" target="_blank" rel="nofollow" class="card" data-cat="security">
+        <div class="card-provider">IBM COGNITIVE CLASS</div>
+        <h3>Cursos gratuitos de AI con badge verificable</h3>
+        <div class="card-tech">Data Science // AI // Security</div>
+        <div class="card-footer">
+          <span class="tag">AI</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://testautomationu.applitools.com/" target="_blank" rel="nofollow" class="card" data-cat="security">
+        <div class="card-provider">TEST AUTOMATION UNIVERSITY</div>
+        <h3>Certificaciones gratuitas en automatización de tests</h3>
+        <div class="card-tech">Automated Testing // QA</div>
+        <div class="card-footer">
+          <span class="tag">TESTING</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- AI / DATA -->
+  <div class="category-section" data-cat="ai">
+    <div class="category-title">AI // DATA</div>
+    <div class="cards">
+
+      <a href="https://www.databricks.com/resources/learn/training/generative-ai-fundamentals" target="_blank" rel="nofollow" class="card" data-cat="ai">
+        <div class="card-provider">DATABRICKS</div>
+        <h3>Generative AI Fundamentals — certificado gratuito</h3>
+        <div class="card-tech">Generative AI // LLMs</div>
+        <div class="card-footer">
+          <span class="tag">AI</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://www.freecodecamp.org/learn/machine-learning-with-python/" target="_blank" rel="nofollow" class="card" data-cat="ai">
+        <div class="card-provider">FREECODECAMP</div>
+        <h3>Machine Learning with Python — certificación gratuita</h3>
+        <div class="card-tech">Python // ML</div>
+        <div class="card-footer">
+          <span class="tag">AI</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://www.freecodecamp.org/learn/data-visualization/" target="_blank" rel="nofollow" class="card" data-cat="ai">
+        <div class="card-provider">FREECODECAMP</div>
+        <h3>Data Visualization — certificación gratuita</h3>
+        <div class="card-tech">D3.js // Data</div>
+        <div class="card-footer">
+          <span class="tag">DATA</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/specializations/deep-learning" target="_blank" rel="nofollow" class="card" data-cat="ai">
+        <div class="card-provider">DEEPLEARNING.AI // COURSERA</div>
+        <h3>Deep Learning Specialization</h3>
+        <div class="card-tech">Deep Learning // Neural Networks</div>
+        <div class="card-footer">
+          <span class="tag">AI</span>
+          <span class="status-ok">● ACTIVO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="https://
